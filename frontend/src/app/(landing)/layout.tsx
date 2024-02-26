@@ -5,7 +5,7 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
     return (
         <>
             <NavBar />
-            {children}
+            <div className="min-h-screen">{children}</div>
         </>
     );
 }
