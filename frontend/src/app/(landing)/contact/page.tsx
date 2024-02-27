@@ -1,3 +1,7 @@
+import ContactUsForm from "@/components/ContactUsForm";
+
 export default function Page() {
-    return <>This is contact page</>;
+    return <main>
+        <ContactUsForm />
+    </main>;
 }

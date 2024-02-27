@@ -6,7 +6,6 @@ export default function NavBar() {
         <div className="flex gap-5 justify-between items-center w-full whitespace-nowrap max-md:flex-wrap max-md:max-w-full px-4" style={{ marginLeft: "0px", marginRight: "0px", marginTop:"26px", fontFamily: "Abhaya Libre" }}>
             {/* Logo and Brand */}
             <div className="flex gap-2.5 self-stretch my-auto  text-2xl font-bold leading-6 text-teal-400">
-                <img/>
                 <div className="grow">
                     <Link href={"/"}>ConQuest</Link>
                 </div>
@@ -16,6 +15,7 @@ export default function NavBar() {
             <div className="flex gap-5 justify-between self-stretch my-auto">
                 <div><Link href={"/home"}>Home</Link></div>
                 <div><Link href={"/about"}>About</Link></div>
+                <div><Link href={"/contact"}>Contact Us</Link></div>
             </div>
 
             {/* Action Buttons */}
