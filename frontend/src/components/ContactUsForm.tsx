@@ -1,5 +1,6 @@
 "use client";
 
+import { BACKEND_URL } from "@/lib/constants";
 import React, { useState } from "react";
 
 export default function ContactUsForm() {
@@ -9,9 +10,7 @@ export default function ContactUsForm() {
         message: "",
     });
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
@@ -32,64 +31,44 @@ export default function ContactUsForm() {
     };
 
     return (
-        <div className="max-w-md mx-auto p-4 bg-gray-100 mt-8 text-black">
+        <div className="max-w-md mx-auto p-4 bg-black mt-40 text-black rounded-lg shadow-lg ">
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
-                    <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-gray-600"
-                    >
-                        Name
-                    </label>
+                    <label htmlFor="name" className="block font-medium text-teal-400 bg-black text-xl py-2  border-teal-500 outline-none rounded-t-lg">Name</label>
                     <input
                         type="text"
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 rounded-md text-teal-400 bg-white text-2xl border-b py-3 border-teal-500 outline-none"
                         required
                     />
                 </div>
                 <div className="mb-4">
-                    <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-600"
-                    >
-                        Email
-                    </label>
+                    <label htmlFor="email" className="block font-medium text-teal-400 bg-black text-xl py-2  border-teal-500 outline-none rounded-t-lg">Email</label>
                     <input
                         type="email"
                         id="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 rounded-md text-teal-400 bg-white text-2xl border-b py-3 border-teal-500 outline-none"
                         required
                     />
                 </div>
                 <div className="mb-4">
-                    <label
-                        htmlFor="message"
-                        className="block text-sm font-medium text-gray-600"
-                    >
-                        Message
-                    </label>
+                    <label htmlFor="message" className="block font-medium text-teal-400 bg-black text-xl py-2  border-teal-500 outline-none rounded-t-lg">Message</label>
                     <textarea
                         id="message"
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 rounded-md text-teal-400 bg-white text-2xl border-b py-3 border-teal-500 outline-none"
                         required
                     />
                 </div>
-                <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                >
-                    Submit
-                </button>
+                <button type="submit" className="bg-teal-600 text-white py-2 px-4 rounded text-center">Submit</button>
             </form>
         </div>
     );
