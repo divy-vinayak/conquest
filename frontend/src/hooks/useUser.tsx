@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-interface UserType {
+type UserType = {
     id: string;
     userName: string;
     email: string;
@@ -8,7 +8,7 @@ interface UserType {
     lastName: string;
     gender: "male" | "female";
     role: 'cm' | 'user' | 'admin'
-}
+} | null;
 
 export default function useUser() {
     const [user, setUser] = useState<UserType | null>(null);
