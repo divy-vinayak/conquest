@@ -41,7 +41,7 @@ export default function ContactUsForm() {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="mt-1 p-2 rounded-md text-teal-400 bg-white text-2xl border-b py-3 border-teal-500 outline-none"
+                        className="mt-1 p-2 rounded-md bg-white border-b py-3 border-teal-500 outline-none w-[500px]"
                         required
                     />
                 </div>
@@ -53,7 +53,7 @@ export default function ContactUsForm() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="mt-1 p-2 rounded-md text-teal-400 bg-white text-2xl border-b py-3 border-teal-500 outline-none"
+                        className="mt-1 p-2 rounded-md bg-white border-b py-3 border-teal-500 outline-none w-[500px]"
                         required
                     />
                 </div>
@@ -64,7 +64,7 @@ export default function ContactUsForm() {
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className="mt-1 p-2 rounded-md text-teal-400 bg-white text-2xl border-b py-3 border-teal-500 outline-none"
+                        className="mt-1 p-2 rounded-md bg-white border-b py-3 border-teal-500 outline-none w-[500px]"
                         required
                     />
                 </div>
