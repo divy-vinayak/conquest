@@ -19,7 +19,7 @@ export default function SideBar() {
                     <Link href={"/explore"}>Explore</Link>
                 </TabButton>
                 <TabButton>
-                    <Link href={"/profile"}>Profile</Link>
+                    <Link href={"/profile/me"}>Profile</Link>
                 </TabButton>
                 <TabButton>
                     <Link href={"/about"}>About</Link>
