@@ -16,5 +16,7 @@ export default function QuestDetails({ questId }: { questId: string }) {
     })
 
     // put the disgns and stuff here and it is being called in (main)questDetails/[questId]/page.tsx
-    return <div></div>;
+    return <div>
+        This is quest page for quest with id : {questId}
+    </div>;
 }
