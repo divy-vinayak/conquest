@@ -1,10 +1,10 @@
 import { getSession } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import React from "react";
+import LogoutButton from "./LogoutButton";
 
 export default async function NavBar() {
     const session = await getSession();
-    const user = session?.user || null;
 
     return (
         <div
@@ -37,26 +37,23 @@ export default async function NavBar() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-5 justify-between self-stretch font-medium">
-                <div className="grow justify-center px-5 py-2.5 bg-teal-400 rounded-lg">
-                    {!user ? (
-                        <Link href={"/api/auth/login"}>
-                            <button>Login</button>
-                        </Link>
-                    ) : (
-                        <Link href={"/api/auth/logout"}>
-                            <button>Logout</button>
-                        </Link>
-                    )}
-                </div>
-                <div
-                    className="grow justify-center self-start px-5 py-2 rounded-lg border-2 border-teal-400 border-solid"
-                    style={{ paddingRight: "20px" }}
-                >
-                    <Link href={"/signup"}>
-                        <button>Get Started</button>
+            <div className="flex gap-3 justify-between self-stretch font-medium">
+                {!session ? (
+                    <Link
+                        href={"/api/auth/login"}
+                        className="grow justify-center px-5 py-2.5 bg-teal-400 rounded-lg"
+                    >
+                        <button>Login</button>
                     </Link>
-                </div>
+                ) : (
+                    <LogoutButton />
+                )}
+                <Link
+                    href={"/api/auth/signup"}
+                    className="grow justify-center self-start px-5 py-2 rounded-lg border-2 border-teal-400 border-solid hover:bg-teal-400"
+                >
+                    <button>Get Started</button>
+                </Link>
             </div>
         </div>
     );
