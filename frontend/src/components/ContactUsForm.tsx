@@ -1,6 +1,5 @@
 "use client";
 
-import { BACKEND_URL } from "@/lib/constants";
 import React, { useState } from "react";
 
 export default function ContactUsForm() {
