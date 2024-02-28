@@ -18,7 +18,7 @@ interface questDataType {
 
 export default function QuestCard({data}: {data: questDataType}){
     return (
-        <div className="flex flex-col pb-5 text-xs leading-6 text-gray-500 bg-white  shadow-md">
+        <div className="flex flex-col pb-5 text-xs leading-6 text-white bg-black  shadow-md">
         <img loading="lazy" src={data.img} alt={data.title} className="w-full h-48 object-cover rounded-t-md" />
         <div className="flex flex-col p-5">
             <div className="text-sm text-gray-400">{data.date.postedOn}</div>
