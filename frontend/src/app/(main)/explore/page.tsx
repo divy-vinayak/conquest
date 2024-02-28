@@ -264,7 +264,17 @@ const questData = [
 
 export default function Page() {
     return (
+        <div>
+        <div className="bg-gray-900 mb-6 mt-10 ">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="bg-black border-2 border-white text-white px-4 py-2 w-full focus:outline-teal-2 focus:bg-black"
+          />
+        </div>
         <div className="flex flex-col items-center bg-black">
+            {/* Search Bar */}
+      
             <h1 className="text-4xl justify-center font-bold  text-teal-400 mt-10">Our Quests</h1>
             <h1 className="text-xl justify-center font-light mb-8 text-grey">Lorem Ipsum is simply dummy text of the printing.</h1>
             <div className="flex justify-center flex-wrap w-full gap-4">
@@ -274,6 +284,7 @@ export default function Page() {
                     </div>
                 ))}
             </div>
+        </div>
         </div>
     );
 }

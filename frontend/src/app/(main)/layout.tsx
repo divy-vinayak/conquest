@@ -9,15 +9,6 @@ export default function MainLayout({children} : {children: ReactNode}) {
       </div>
     </div>
     <div className="col-end-6 col-start-2 justify-center col-span-6 h-full ">
-      {/* Search Bar */}
-      <div className="bg-gray-900 mb-6 mt-10 ">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-black border-2 border-white text-white px-4 py-2 w-full focus:outline-teal-2 focus:bg-black"
-          />
-        </div>
-
         {/* Children Content */}
         <div className="flex-1">{children}</div>
       </div>
