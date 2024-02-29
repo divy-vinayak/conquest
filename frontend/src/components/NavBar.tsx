@@ -1,10 +1,8 @@
-import { getSession } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import React from "react";
 import LogoutButton from "./LogoutButton";
 
 export default async function NavBar() {
-    const session = await getSession();
 
     return (
         <div
@@ -38,16 +36,16 @@ export default async function NavBar() {
 
             {/* Action Buttons */}
             <div className="flex gap-3 justify-between self-stretch font-medium">
-                {!session ? (
+                {!false ? (
                     <>
                         <Link
-                            href={"/api/auth/login"}
+                            href={"/login"}
                             className="grow justify-center px-5 py-2.5 bg-teal-400 rounded-lg"
                         >
                             <button>Login</button>
                         </Link>
                         <Link
-                            href={"/api/auth/signup"}
+                            href={"/signup"}
                             className="grow justify-center self-start px-5 py-2 rounded-lg border-2 border-teal-400 border-solid hover:bg-teal-400"
                         >
                             <button>Get Started</button>
