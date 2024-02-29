@@ -33,7 +33,11 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
+<<<<<<< HEAD
 set -gx VIRTUAL_ENV "/home/pratyush/Desktop/conquest/backend/.venv"
+=======
+set -gx VIRTUAL_ENV "/home/shard/in-progress/dev/conquest/backend/.venv"
+>>>>>>> a8bc559a1f209d8caacca3e26807bb6870d260eb
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

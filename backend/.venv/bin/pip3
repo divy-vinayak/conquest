@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/home/pratyush/Desktop/conquest/backend/.venv/bin/python3
+=======
+#!/home/shard/in-progress/dev/conquest/backend/.venv/bin/python3
+>>>>>>> a8bc559a1f209d8caacca3e26807bb6870d260eb
 # -*- coding: utf-8 -*-
 import re
 import sys
