@@ -1,8 +1,8 @@
+"use client";
 import SideBar from "@/components/SideBar";
-import { redirect } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
-export default async function MainLayout({
+export default function MainLayout({
     children,
 }: {
     children: ReactNode;
