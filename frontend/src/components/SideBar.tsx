@@ -1,17 +1,20 @@
 import Link from "next/link";
 import React from "react";
 import TabButton from "./TabButton";
+import LogoutButton from "./LogoutButton";
 
 export default function SideBar() {
     return (
-        <div className="col-span-1  flex flex-col overflow-hidden items-center gap-4" style={ {fontFamily: "Abhaya Libre"} }>
-            <div className=" mt-10 ml-14 flex gap-2.5 self-stretch my-auto  text-2xl font-light leading-6 text-teal-400">
+        <div className="col-span-1 flex flex-col overflow-hidden items-center gap-4 justify-between" style={ {fontFamily: "Abhaya Libre", height:"100%"} }>
+            {/* ConQuest */}
+            <div className="mt-10 justify-center flex text-2xl font-light text-teal-400">
                 <div className="grow">
                     <Link href={"/"}>ConQuest</Link>
                 </div>
             </div>
             
-            <div className="flex mt-20 flex-col gap-2 w-full font-light">
+            {/* Tab Buttons */}
+            <div className="flex flex-col mt-10 w-full font-light">
                 <TabButton>
                     <Link href={"/dashboard"}>Dashboard</Link>
                 </TabButton>
@@ -24,6 +27,11 @@ export default function SideBar() {
                 <TabButton>
                     <Link href={"/about"}>About</Link>
                 </TabButton>
+            </div>
+            
+            {/* Logout Button */}
+            <div className="mt-auto flex flex-col w-full font-light mb-2">
+                <LogoutButton />
             </div>
         </div>
     );

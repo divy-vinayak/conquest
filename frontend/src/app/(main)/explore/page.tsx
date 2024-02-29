@@ -265,14 +265,17 @@ const questData = [
 export default function Page() {
     return (
         <div>
-        <div className="bg-gray-900 mb-6 mt-10 ">
+        <div className="bg-gray-900 mb-6 mt-10 fixed w-[75%]">
           <input
             type="text"
             placeholder="Search..."
             className="bg-black border-2 border-white text-white px-4 py-2 w-full focus:outline-teal-2 focus:bg-black"
           />
         </div>
-        <div className="flex flex-col items-center bg-black">
+        <br />
+        <br />
+        <br />
+        <div className="flex flex-col items-center bg-black ">
             {/* Search Bar */}
       
             <h1 className="text-4xl justify-center font-bold  text-teal-400 mt-10">Our Quests</h1>

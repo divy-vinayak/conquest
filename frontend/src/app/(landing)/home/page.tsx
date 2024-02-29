@@ -17,6 +17,9 @@ export default function Page() {
                 world to discover the beauty, culture, and community spirit of
                 Japan's heartlands.
             </div>
+            
         </div>
+        
+        
     );
 }
