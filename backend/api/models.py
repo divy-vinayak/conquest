@@ -5,6 +5,13 @@ from django.core.validators import MaxValueValidator
 from api.managers import CustomUserManager
 # Create your models here.
 
+class City(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+    
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
     # username = models.CharField(_('username'), max_length=150, unique=True)
@@ -18,18 +25,13 @@ class User(AbstractUser):
     phone_number = models.CharField(_('phone number'), max_length=15, null=True)
     occupation = models.CharField(_('occupation'), max_length=255, null=True)
     hobbies = models.CharField(_('hobbies'), max_length=255, null=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    address = models.TextField(_('address'), null=True)
 
     objects = CustomUserManager()
 
     groups = models.ManyToManyField(Group, related_name='custom_user_set')
     user_permissions = models.ManyToManyField(Permission, related_name='custom_user_set')
-
-class City(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
 
 class Location(models.Model):
     id = models.AutoField(primary_key=True)
