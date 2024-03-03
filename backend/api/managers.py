@@ -7,11 +7,11 @@ class CustomUserManager(BaseUserManager):
     for authentication instead of usernames.
     """
 
-    def create_user(self, email, password, type, **extra_fields):
+    def create_user(self, email, password, role='user', **extra_fields):
         if not email:
             raise ValueError(_('Users must have an email address'))
-        if type not in ['cm', 'admin', 'user']:
-            raise ValueError(_('User type must be either candidate or recruiter'))
+        if role not in ['cm', 'admin', 'user']:
+            raise ValueError(_('User role must be either candidate or recruiter'))
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)

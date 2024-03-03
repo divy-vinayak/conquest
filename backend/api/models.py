@@ -1,57 +1,114 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.utils.translation import gettext_lazy as _
+from django.core.validators import MaxValueValidator
 from api.managers import CustomUserManager
 # Create your models here.
 
 class User(AbstractUser):
-    type = models.CharField(max_length=255, default='user') # candidate or recruiter
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(_('username'), max_length=150, unique=True)
+    password = models.CharField(_('password'), max_length=128)
+    is_superuser = models.BooleanField(_('superuser status'), default=False)
+    email = models.EmailField(_('email address'), unique=True)
+    role = models.CharField(_('role'), max_length=255)
+    first_name = models.CharField(_('first name'), max_length=30, null=True)
+    last_name = models.CharField(_('last name'), max_length=30, null=True)
+    date_of_birth = models.DateField(_('date of birth'), null=True)
+    phone_number = models.CharField(_('phone number'), max_length=15, null=True)
+    occupation = models.CharField(_('occupation'), max_length=255, null=True)
+    hobbies = models.CharField(_('hobbies'), max_length=255, null=True)
+
     objects = CustomUserManager()
 
     groups = models.ManyToManyField(Group, related_name='custom_user_set')
     user_permissions = models.ManyToManyField(Permission, related_name='custom_user_set')
 
-# class Skill(models.Model):
-#     name = models.CharField(max_length=100)
+class City(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
 
-# class Town(models.Model):
-#     population = models.PositiveIntegerField(null=True, blank=True)
-#     avg_annual_income = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-#     immigrants = models.PositiveIntegerField(null=True, blank=True)
-#     language = models.CharField(max_length=100, null=True, blank=True)
-#     internet_availability = models.BooleanField(default=False)
-#     skills_gained = models.ManyToManyField(Skill, blank=True)
+    def __str__(self):
+        return self.name
 
-# class Industry(models.Model):
-#     town = models.ForeignKey(Town, on_delete=models.CASCADE, related_name='industries')
-#     name = models.CharField(max_length=255)
+class Location(models.Model):
+    id = models.AutoField(primary_key=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
-# class Attraction(models.Model):
-#     town = models.ForeignKey(Town, on_delete=models.CASCADE, related_name='attractions')
-#     name = models.CharField(max_length=255)
+    def __str__(self):
+        return f"{self.city.name}, ({self.latitude}, {self.longitude})"
 
-# class Location(models.Model):
-#     city = models.CharField(max_length=100)
-#     country = models.CharField(max_length=100)
-#     latitude = models.FloatField()
-#     longitude = models.FloatField()
+class Quest(models.Model):
+    id = models.AutoField(primary_key=True)
+    owner_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(_('title'), max_length=255)
+    poster = models.URLField(_('poster URL'))
+    description = models.TextField(_('description'))
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    learnings = models.TextField(_('learnings'))
+    start_date = models.DateField(_('start date'))
+    end_date = models.DateField(_('end date'))
+    max_registrations = models.PositiveIntegerField(_('max registrations'), validators=[MaxValueValidator(5000)])
+    registration_ends = models.DateField(_('registration ends'))
 
-# class Quest(models.Model):
-#     title = models.CharField(max_length=255)
-#     img = models.ImageField(upload_to='quest_images/')
-#     description = models.TextField()
-#     locations = models.ManyToManyField(Location, through='QuestLocation')
-#     requirements = models.ManyToManyField('Requirement')
-#     rewards = models.ManyToManyField('Reward')
-#     town = models.ForeignKey(Town, on_delete=models.SET_NULL, null=True, blank=True)
-#     starting_date = models.DateField(null=True, blank=True)
-#     end_date = models.DateField(null=True, blank=True)
+    def __str__(self):
+        return self.title
+    
+class QuestRegistration(models.Model):
+    id = models.AutoField(primary_key=True)
+    registered_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='registrations')
+    registered_for = models.ForeignKey(Quest, on_delete=models.CASCADE, related_name='registrations')
+    completed = models.BooleanField(default=False)
 
-# class QuestLocation(models.Model):
-#     quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
-#     location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"Registration {self.id} for {self.registered_for.title} by {self.registered_by.username}"
 
-# class Requirement(models.Model):
-#     requirement = models.CharField(max_length=255)
+class Reward(models.Model):
+    id = models.AutoField(primary_key=True)
+    quest_id = models.ForeignKey(Quest, on_delete=models.CASCADE, related_name='rewards')
+    reward = models.TextField(_('reward'))
 
-# class Reward(models.Model):
-#     reward = models.CharField(max_length=255)
+    def __str__(self):
+        return f"Reward {self.id} for {self.quest_id.title}"
+
+class Requirement(models.Model):
+    id = models.AutoField(primary_key=True)
+    quest_id = models.ForeignKey(Quest, on_delete=models.CASCADE, related_name='requirements')
+    requirements = models.TextField(_('requirements'))
+
+    def __str__(self):
+        return f"Requirements {self.id} for {self.quest_id.title}"
+    
+class Language(models.Model):
+    id = models.AutoField(primary_key=True)
+    language = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.language
+
+class InternetFacility(models.Model):
+    id = models.AutoField(primary_key=True)
+    g5 = models.BooleanField(default=False)
+    g4 = models.BooleanField(default=False)
+    broadband = models.BooleanField(default=False)
+    wifi = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Internet Facility {self.id}"
+
+class CityDetail(models.Model):
+    id = models.AutoField(primary_key=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    population = models.PositiveIntegerField()
+    avg_annual_income = models.PositiveIntegerField()
+    local_industries = models.TextField(_('local industries'))
+    immigrants = models.BooleanField()
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    attractions = models.TextField(_('attractions'))
+    internet_facilities = models.ForeignKey(InternetFacility, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Details for {self.city.name}"
+
