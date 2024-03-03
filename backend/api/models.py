@@ -7,7 +7,7 @@ from api.managers import CustomUserManager
 
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
-    username = models.CharField(_('username'), max_length=150, unique=True)
+    # username = models.CharField(_('username'), max_length=150, unique=True)
     password = models.CharField(_('password'), max_length=128)
     is_superuser = models.BooleanField(_('superuser status'), default=False)
     email = models.EmailField(_('email address'), unique=True)

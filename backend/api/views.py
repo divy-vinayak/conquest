@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 
 from api.serializers import UserSerializer
+from api import serializers, models
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, authentication_classes
@@ -76,3 +77,18 @@ def get_user(request):
         return Response({"message": "User details fetched successfully", "data": data}, status=200)
     except Exception as e:
         return Response({"error": str(e)}, status=400)
+    
+@api_view(['GET'])
+# @authentication_classes([Authentication])
+def get_all_quests(request):
+    index = int(request.GET.get('index', 0))
+    offset = int(request.GET.get('offset', 50))
+    quests = models.Quest.objects.all()[index: index + offset]
+    quests = serializers.QuestSerializer(quests, many=True)
+
+    return Response({
+        'message': 'yay',
+        'data': quests.data
+    }, status=200)
+
+
